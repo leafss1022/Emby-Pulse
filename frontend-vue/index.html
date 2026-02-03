@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2.32.15">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2.32.15">
+    <link rel="apple-touch-icon" href="/icons/icon-192.png?v=2.32.15">
+    <link rel="mask-icon" href="/favicon.svg?v=2.32.15" color="#2563eb">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#3b82f6">
+    <title>Emby Stats</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+    <script>
+      // Service Worker 注册和更新检测
+      if ('serviceWorker' in navigator) {
+        let refreshing = false;
+
+        // 先清理旧的 Service Worker
+        navigator.serviceWorker.getRegistrations().then(registrations => {
+          for (let registration of registrations) {
+            registration.unregister();
+          }
+
+          // 清理完后重新注册新的
+          setTimeout(() => {
+            navigator.serviceWorker.register('/sw.js')
+              .then(registration => {
+                console.log('Service Worker 注册成功');
+
+                // 检查更新
+                registration.addEventListener('updatefound', () => {
+                  const newWorker = registration.installing;
+                  newWorker.addEventListener('statechange', () => {
+                    if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                      // 有新版本可用
+                      if (confirm('发现新版本，是否立即更新？')) {
+                        newWorker.postMessage({ type: 'SKIP_WAITING' });
+                      }
+                    }
+                  });
+                });
+
+                // 每分钟检查更新
+                setInterval(() => {
+                  registration.update();
+                }, 60000);
+              })
+              .catch(err => {
+                console.error('Service Worker 注册失败:', err);
+              });
+          }, 500);
+        });
+
+        // 监听控制器变化，自动刷新
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+          if (!refreshing) {
+            refreshing = true;
+            window.location.reload();
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

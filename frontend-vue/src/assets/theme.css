@@ -1,0 +1,334 @@
+/* Emby-Pulse Modern Theme */
+
+/* ==================== Global Base ==================== */
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #6366f1;
+  --primary-light: #818cf8;
+  --primary-dark: #4f46e5;
+  --accent-blue: #3b82f6;
+  --accent-purple: #8b5cf6;
+  --accent-pink: #ec4899;
+  --accent-teal: #14b8a6;
+  
+  --bg-light: #f8fafc;
+  --bg-surface-light: #ffffff;
+  --text-primary-light: #0f172a;
+  --text-secondary-light: #64748b;
+  
+  --bg-dark: #0f172a;
+  --bg-surface-dark: #1e293b;
+  --text-primary-dark: #f1f5f9;
+  --text-secondary-dark: #94a3b8;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ==================== Light Mode ==================== */
+.v-theme--light body {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  color: var(--text-primary-light);
+}
+
+.v-theme--light .v-application__wrap {
+  background: transparent;
+}
+
+/* Light Mode Navigation & Header */
+.v-theme--light .v-navigation-drawer {
+  background: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-right: 1px solid rgba(0, 0, 0, 0.06) !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05) !important;
+}
+
+.v-theme--light .v-app-bar {
+  background: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Light Mode Cards */
+.v-theme--light .v-card {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid rgba(255, 255, 255, 0.8) !important;
+  border-radius: 20px !important;
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.05),
+    0 10px 15px -3px rgba(0, 0, 0, 0.08) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.v-theme--light .v-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 8px 12px -1px rgba(0, 0, 0, 0.08),
+    0 20px 25px -5px rgba(0, 0, 0, 0.12) !important;
+  border-color: rgba(99, 102, 241, 0.2) !important;
+}
+
+/* ==================== Dark Mode ==================== */
+.v-theme--dark body {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: var(--text-primary-dark);
+  min-height: 100vh;
+}
+
+.v-theme--dark .v-application__wrap {
+  background: transparent;
+}
+
+/* Dark Mode Navigation & Header */
+.v-theme--dark .v-navigation-drawer {
+  background: rgba(15, 23, 42, 0.9) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-right: 1px solid rgba(255, 255, 255, 0.05) !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3) !important;
+}
+
+.v-theme--dark .v-app-bar {
+  background: rgba(15, 23, 42, 0.9) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Dark Mode Cards */
+.v-theme--dark .v-card {
+  background: rgba(30, 41, 59, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 20px !important;
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.3),
+    0 10px 15px -3px rgba(0, 0, 0, 0.4),
+    0 0 40px rgba(99, 102, 241, 0.1) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.v-theme--dark .v-card:hover {
+  transform: translateY(-4px);
+  background: rgba(30, 41, 59, 0.95) !important;
+  box-shadow: 
+    0 8px 12px -1px rgba(0, 0, 0, 0.4),
+    0 20px 25px -5px rgba(0, 0, 0, 0.5),
+    0 0 60px rgba(99, 102, 241, 0.2) !important;
+  border-color: rgba(99, 102, 241, 0.3) !important;
+}
+
+/* ==================== Buttons ==================== */
+.v-btn {
+  border-radius: 12px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.5px !important;
+  text-transform: none !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+.v-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.15),
+    0 8px 24px rgba(0, 0, 0, 0.2) !important;
+}
+
+.v-btn--variant-elevated {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark)) !important;
+}
+
+/* ==================== Inputs ==================== */
+.v-field {
+  border-radius: 12px !important;
+  transition: all 0.3s ease !important;
+}
+
+.v-theme--light .v-field {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border: 2px solid rgba(0, 0, 0, 0.06) !important;
+}
+
+.v-theme--dark .v-field {
+  background: rgba(15, 23, 42, 0.8) !important;
+  border: 2px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.v-field--focused {
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1) !important;
+}
+
+/* ==================== Stat Icons ==================== */
+.stat-icon {
+  border-radius: 16px !important;
+  width: 56px !important;
+  height: 56px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.v-theme--light .stat-icon {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
+}
+
+.v-theme--dark .stat-icon {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2));
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.stat-icon:hover {
+  transform: scale(1.1);
+}
+
+/* ==================== Dialogs ==================== */
+.v-dialog .v-card {
+  border-radius: 24px !important;
+  overflow: hidden !important;
+}
+
+.v-theme--light .v-dialog .v-card {
+  background: rgba(255, 255, 255, 0.98) !important;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15) !important;
+}
+
+.v-theme--dark .v-dialog .v-card {
+  background: rgba(15, 23, 42, 0.98) !important;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* ==================== List Items ==================== */
+.v-list-item {
+  border-radius: 12px !important;
+  margin: 4px 8px !important;
+  transition: all 0.3s ease !important;
+}
+
+.v-list-item:hover {
+  background: rgba(99, 102, 241, 0.08) !important;
+}
+
+.v-theme--dark .v-list-item--active {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.15)) !important;
+}
+
+.v-theme--light .v-list-item--active {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1)) !important;
+}
+
+/* ==================== Chips ==================== */
+.v-chip {
+  border-radius: 10px !important;
+  font-weight: 500 !important;
+  transition: all 0.3s ease !important;
+}
+
+.v-chip:hover {
+  transform: scale(1.05);
+}
+
+/* ==================== Scrollbar ==================== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
+
+.v-theme--light ::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+}
+
+.v-theme--light ::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.v-theme--dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+}
+
+.v-theme--dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* ==================== Page Transitions ==================== */
+.page-fade-enter-active,
+.page-fade-leave-active {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.page-fade-enter-from {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-fade-leave-to {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+/* ==================== Gradient Text ==================== */
+.gradient-text {
+  background: linear-gradient(135deg, var(--primary-color), var(--accent-purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ==================== Accent Cards ==================== */
+.card-accent-blue {
+  border-left: 4px solid var(--accent-blue) !important;
+}
+
+.card-accent-purple {
+  border-left: 4px solid var(--accent-purple) !important;
+}
+
+.card-accent-pink {
+  border-left: 4px solid var(--accent-pink) !important;
+}
+
+.card-accent-teal {
+  border-left: 4px solid var(--accent-teal) !important;
+}
+
+/* ==================== Responsive ==================== */
+@media (max-width: 768px) {
+  .v-card {
+    border-radius: 16px !important;
+  }
+  
+  .v-btn {
+    height: 40px !important;
+  }
+  
+  .stat-icon {
+    width: 48px !important;
+    height: 48px !important;
+  }
+}

@@ -1,0 +1,136 @@
+<template>
+  <v-card class="stat-card pulse-card" hover>
+    <v-card-text>
+      <div class="stat-content">
+        <div class="stat-icon" :style="{ background: iconBgColor }">
+          <v-icon size="24" :color="iconColor">{{ icon }}</v-icon>
+        </div>
+        <div class="stat-info">
+          <div class="stat-label">{{ label }}</div>
+          <AnimatedNumber
+            v-if="animated && typeof value === 'number'"
+            :value="value"
+            class="stat-value"
+            :class="valueColorClass"
+          />
+          <div v-else class="stat-value" :class="valueColorClass">
+            {{ displayValue }}
+          </div>
+        </div>
+      </div>
+    </v-card-text>
+  </v-card>
+</template>
+
+<script setup lang="ts">
+import { computed } from 'vue'
+import AnimatedNumber from './AnimatedNumber.vue'
+
+interface Props {
+  icon: string
+  iconColor?: string
+  iconBgColor?: string
+  label: string
+  value: number | string
+  valueColor?: 'primary' | 'success' | 'warning' | 'error' | 'info'
+  animated?: boolean
+  suffix?: string
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  iconColor: 'primary',
+  iconBgColor: 'rgba(29, 78, 216, 0.1)',
+  valueColor: 'primary',
+  animated: true,
+  suffix: '',
+})
+
+const valueColorClass = computed(() => `text-${props.valueColor}`)
+
+const displayValue = computed(() => {
+  if (typeof props.value === 'number') {
+    return props.suffix ? `${props.value}${props.suffix}` : props.value
+  }
+  return props.value
+})
+</script>
+
+<style scoped>
+.stat-card {
+  cursor: pointer;
+  animation: fadeInUp 0.5s ease backwards;
+}
+
+.pulse-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pulse-card:hover {
+  transform: translateY(-6px) scale(1.02);
+}
+
+/* 深色模式增强 */
+.v-theme--dark .pulse-card {
+  border: 1px solid rgba(59, 130, 246, 0.15);
+}
+
+.v-theme--dark .pulse-card:hover {
+  border-color: rgba(59, 130, 246, 0.35);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6) !important;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stat-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.stat-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.pulse-card:hover .stat-icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.stat-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.stat-label {
+  font-size: 13px;
+  opacity: 0.7;
+  margin-bottom: 4px;
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 768px) {
+  .stat-value {
+    font-size: 20px;
+  }
+}
+</style>

@@ -1,0 +1,25 @@
+{
+  "clients": {
+    "Emby Web": "Web",
+    "Emby for Android": "Android",
+    "Emby for Android TV": "Android TV",
+    "Emby for iOS": "iOS",
+    "Emby Theater": "Theater",
+    "Infuse": "Infuse",
+    "Kodi": "Kodi",
+    "Jellyfin Web": "Web",
+    "Jellyfin Android": "Android"
+  },
+  "devices": {
+    "Mozilla Firefox Windows": "Firefox",
+    "Chrome Windows": "Chrome",
+    "Safari macOS": "Safari",
+    "Microsoft Edge Windows": "Edge",
+    "Samsung UE55TU8000 Series (55)": "Samsung TV",
+    "LG WebOS TV OLED55C1PUB": "LG TV",
+    "iPhone 15 Pro Max": "iPhone",
+    "iPad Pro 12.9-inch (6th generation)": "iPad Pro",
+    "SHIELD Android TV": "NVIDIA Shield",
+    "Chromecast with Google TV": "Chromecast"
+  }
+}

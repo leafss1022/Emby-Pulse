@@ -1,0 +1,144 @@
+@import "tailwindcss";
+
+/* Custom theme configuration */
+@theme {
+  --color-primary-50: #001731;
+  --color-primary-100: #002e62;
+  --color-primary-200: #004493;
+  --color-primary-300: #005bc4;
+  --color-primary-400: #006FEE;
+  --color-primary-500: #338ef7;
+  --color-primary-600: #66aaf9;
+  --color-primary-700: #99c7fb;
+  --color-primary-800: #cce3fd;
+  --color-primary-900: #e6f1fe;
+  --color-primary: #006FEE;
+
+  --color-success: #17c964;
+  --color-warning: #f5a524;
+  --color-danger: #f31260;
+  --color-secondary: #9353d3;
+
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+/* Dark theme (default) */
+:root, .dark {
+  --color-background: #000000;
+  --color-foreground: #ECEDEE;
+  --color-content1: #18181b;
+  --color-content2: #27272a;
+  --color-content3: #3f3f46;
+  --color-content4: #52525b;
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-border-light: rgba(255, 255, 255, 0.05);
+  --color-text-muted: #a1a1aa;
+  --color-text-secondary: #71717a;
+  --color-hover-overlay: rgba(255, 255, 255, 0.05);
+  --color-card-gradient-end: #1a1a1f;
+  --color-card-hover: #1f1f23;
+  --color-scrollbar-track: #18181b;
+  --color-scrollbar-thumb: #3f3f46;
+  --color-scrollbar-thumb-hover: #52525b;
+  --color-header-bg: rgba(0, 0, 0, 0.8);
+  --color-nav-bg: rgba(24, 24, 27, 0.7);
+}
+
+/* Light theme */
+.light {
+  --color-background: #eef1f5;
+  --color-foreground: #1a1a1a;
+  --color-content1: #ffffff;
+  --color-content2: #f8f9fa;
+  --color-content3: #f0f2f5;
+  --color-content4: #e4e6eb;
+  --color-border: #b8b8b8;
+  --color-border-light: #c8c8c8;
+  --color-text-muted: #4a4a4a;
+  --color-text-secondary: #65676b;
+  --color-hover-overlay: rgba(0, 0, 0, 0.04);
+  --color-card-gradient-end: #ffffff;
+  --color-card-hover: #f8f9fa;
+  --color-scrollbar-track: #e4e6eb;
+  --color-scrollbar-thumb: #bcc0c4;
+  --color-scrollbar-thumb-hover: #8a8d91;
+  --color-header-bg: rgba(255, 255, 255, 0.9);
+  --color-nav-bg: rgba(255, 255, 255, 0.95);
+}
+
+/* Base styles */
+* {
+  font-family: var(--font-sans);
+}
+
+body {
+  margin: 0;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* PWA standalone mode adjustments */
+@media (display-mode: standalone) {
+  header {
+    padding-top: env(safe-area-inset-top);
+  }
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-scrollbar-track);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-scrollbar-thumb);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-scrollbar-thumb-hover);
+}
+
+/* Animation utilities */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes ping {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.animate-ping {
+  animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}

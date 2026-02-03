@@ -1,0 +1,399 @@
+/* Vuetify 3 主题样式 - 柔和圆润设计 */
+
+/* ==================== 全局基础 ==================== */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==================== Vuetify组件样式覆盖 ==================== */
+
+/* 卡片 - 超大圆角 + 悬浮效果 */
+.v-card {
+  border-radius: 20px !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  /* 优化：增强立体感阴影 */
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04) !important;
+  /* 优化：增强卡片边界感，防止融进背景 */
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+.v-card.hover:hover,
+.v-card[hover]:hover {
+  transform: translateY(-4px);
+  /* 优化：悬浮时阴影加深 */
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05) !important;
+  border-color: rgba(0, 0, 0, 0.12) !important;
+}
+
+/* 磨砂玻璃侧边栏和顶栏 - 浅色模式 */
+.v-theme--light .v-navigation-drawer,
+.v-theme--light .v-app-bar {
+  /* 增加透明度，从 0.7 降至 0.6，让背景透出来更多 */
+  background-color: rgba(255, 255, 255, 0.6) !important;
+  /* 增加模糊度 */
+  backdrop-filter: blur(25px) saturate(200%);
+  -webkit-backdrop-filter: blur(25px) saturate(200%);
+  border-right: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
+.v-theme--light .v-app-bar {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
+
+/* 全局背景磨砂玻璃风格 - 浅色模式 */
+.v-theme--light body {
+  /* 使用复杂渐变背景，大幅降低亮度以减少刺眼感，采用更柔和的蓝灰色调 */
+  background-color: #dbe4ef; /* 基础色调更深 */
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(160, 190, 240, 0.5) 0, transparent 50%), 
+    radial-gradient(at 50% 100%, rgba(200, 210, 245, 0.5) 0, transparent 50%), 
+    radial-gradient(at 100% 0%, rgba(180, 200, 240, 0.5) 0, transparent 50%),
+    linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%); /* 底层线性渐变也更深 */
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+.v-theme--light .v-application {
+  background: transparent !important;
+}
+/* 让主内容区完全透明 */
+.v-theme--light .v-main {
+  background: transparent !important;
+}
+
+/* 浅色模式下，让卡片也具有半透明磨砂质感，使其与背景更融合但又有层级 */
+.v-theme--light .v-card {
+  /* 稍微降低透明度，让深色背景透出来更多，降低整体亮度 */
+  background-color: rgba(255, 255, 255, 0.7) !important;
+  backdrop-filter: blur(25px) saturate(150%);
+  -webkit-backdrop-filter: blur(25px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  /* 增强阴影，多层叠加，增加扩散半径和垂直偏移，提升立体感 */
+  box-shadow: 
+    0 12px 24px -4px rgba(0, 0, 0, 0.12), 
+    0 4px 8px -2px rgba(0, 0, 0, 0.08) !important;
+}
+
+.v-theme--light .v-card.hover:hover,
+.v-theme--light .v-card[hover]:hover {
+  background-color: rgba(255, 255, 255, 0.85) !important;
+  transform: translateY(-6px);
+  /* 悬浮时阴影更加深邃 */
+  box-shadow: 
+    0 24px 32px -4px rgba(0, 0, 0, 0.15), 
+    0 12px 16px -4px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* 深色模式 - 炫酷立体渐变风格 */
+.v-theme--dark body {
+  background-color: #050b14; /* 深邃蓝黑 */
+  background-image: 
+    radial-gradient(at 10% 20%, rgba(29, 78, 216, 0.15) 0, transparent 40%), 
+    radial-gradient(at 90% 10%, rgba(147, 51, 234, 0.1) 0, transparent 40%),
+    radial-gradient(at 50% 90%, rgba(16, 24, 39, 1) 0, transparent 50%);
+  background-attachment: fixed;
+}
+
+.v-theme--dark .v-card {
+  /* 渐变背景 + 磨砂质感 */
+  background: linear-gradient(145deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.8) 100%) !important;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  
+  /* 顶部高光边框，模拟光源 */
+  box-shadow: 
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.1), /* 顶部内发光 */
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05), /* 整体微弱边框 */
+    0 10px 20px -5px rgba(0, 0, 0, 0.5),      /* 深邃投影 */
+    0 4px 6px -2px rgba(0, 0, 0, 0.3) !important;
+    
+  border: none !important; /* 移除默认边框，使用 box-shadow 模拟 */
+}
+
+
+.v-theme--dark .v-card.hover:hover,
+.v-theme--dark .v-card[hover]:hover {
+  transform: translateY(-6px);
+  background: linear-gradient(145deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%) !important;
+  /* 悬浮时增强光影和霓虹感 */
+  box-shadow: 
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.15),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+    0 20px 30px -5px rgba(0, 0, 0, 0.6),
+    0 0 15px rgba(59, 130, 246, 0.1) !important; /* 微弱的蓝色外发光 */
+}
+
+/* 玻璃态效果 - 仅应用于对话框和特定卡片 */
+.v-theme--dark .v-dialog > .v-overlay__content > .v-card {
+  background: linear-gradient(145deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%) !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* 按钮 - 圆角 + 悬浮动画 */
+.v-btn {
+  border-radius: 16px !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  text-transform: none !important;
+  font-weight: 500 !important;
+}
+
+.v-btn:hover {
+  transform: translateY(-2px);
+}
+
+.v-btn.v-btn--variant-flat:hover {
+  box-shadow: 0 8px 20px rgba(var(--v-theme-primary), 0.3) !important;
+}
+
+/* 深色模式按钮增强 */
+.v-theme--dark .v-btn.v-btn--variant-flat:hover {
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.4) !important; /* 霓虹发光 */
+}
+
+/* 输入框 - 圆角 */
+.v-text-field .v-field {
+  border-radius: 12px !important;
+}
+
+.v-select .v-field {
+  border-radius: 12px !important;
+}
+
+/* 深色模式输入框 - 适度聚焦效果 */
+.v-theme--dark .v-field--focused {
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25) !important;
+}
+
+/* 输入框hint文字间距修复 */
+.v-text-field .v-messages {
+  min-height: 20px;
+  padding-top: 4px;
+}
+
+.v-input__details {
+  padding-inline: 16px;
+  min-height: 22px;
+}
+
+/* 对话框 - 超大圆角 */
+.v-dialog {
+  border-radius: 24px !important;
+  overflow: hidden;
+}
+
+/* 深色模式对话框增强 */
+.v-theme--dark .v-dialog > .v-overlay__content > .v-card {
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.8) !important;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+/* 列表项 - 圆角 + 悬停动画 */
+.v-list-item {
+  border-radius: 12px !important;
+  margin: 4px 8px !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.v-list-item:hover {
+  transform: translateX(4px);
+}
+
+.v-list-item--active {
+  box-shadow: 0 4px 12px rgba(var(--v-theme-primary), 0.25) !important;
+}
+
+/* 深色模式列表项增强 */
+.v-theme--dark .v-list-item--active {
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.25) !important;
+  background: rgba(59, 130, 246, 0.12) !important;
+}
+
+/* Chip标签 - 柔和圆角 */
+.v-chip {
+  border-radius: 12px !important;
+  font-weight: 500 !important;
+}
+
+/* 导航抽屉 */
+.v-navigation-drawer {
+  border-radius: 0 !important;
+}
+
+/* 深色模式导航抽屉 - 适度蓝色边框 + 玻璃态 */
+.v-theme--dark .v-navigation-drawer {
+  border-right: 1px solid rgba(59, 130, 246, 0.12) !important;
+  background: rgba(19, 22, 31, 0.95) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* 深色模式顶栏 - 玻璃态 */
+.v-theme--dark .v-app-bar {
+  border-bottom: 1px solid rgba(59, 130, 246, 0.12) !important;
+  background: rgba(19, 22, 31, 0.95) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* 滚动条美化 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* 深色模式滚动条 - 适度蓝色调 */
+.v-theme--dark ::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.v-theme--dark ::-webkit-scrollbar-thumb {
+  background: rgba(59, 130, 246, 0.2);
+}
+
+.v-theme--dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(59, 130, 246, 0.35);
+}
+
+/* 图标 - 柔和效果 */
+.v-icon {
+  transition: all 0.2s ease !important;
+}
+
+.v-btn:hover .v-icon,
+.v-list-item:hover .v-icon {
+  transform: scale(1.05);
+}
+
+/* ==================== 移动端优化 ==================== */
+
+@media (max-width: 768px) {
+  .page {
+    padding: 16px;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .page-title {
+    font-size: 24px;
+  }
+
+  /* 移动端按钮最小触摸尺寸 */
+  .v-btn {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* 移动端卡片间距优化 */
+  .v-card {
+    margin-bottom: 12px;
+  }
+
+  /* 移动端表格优化 */
+  .v-data-table {
+    font-size: 13px;
+  }
+
+  /* 移动端对话框全屏化 */
+  .v-dialog {
+    max-width: calc(100vw - 32px) !important;
+    margin: 16px;
+  }
+}
+
+/* 平板优化 (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .page {
+    padding: 20px;
+    max-width: 100%;
+  }
+
+  /* 平板端卡片网格优化 */
+  .v-row > .v-col {
+    padding: 8px;
+  }
+}
+
+/* iOS 安全区域适配 */
+@supports (padding: env(safe-area-inset-bottom)) {
+  body {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}
+
+/* 防止过度滚动 */
+body {
+  overscroll-behavior-y: contain;
+}
+
+/* 触摸优化 */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a, button, input, textarea, select {
+  -webkit-tap-highlight-color: rgba(29, 78, 216, 0.2);
+}
+
+/* 触摸反馈动画（仅移动端） */
+@media (hover: none) {
+  .v-btn:active {
+    transform: scale(0.97) !important;
+    transition: transform 0.1s !important;
+  }
+
+  .v-card:active {
+    transform: translateY(0) scale(0.98) !important;
+  }
+
+  .v-list-item:active {
+    transform: scale(0.98) !important;
+  }
+}
+
+/* 横屏模式优化 */
+@media (max-width: 768px) and (orientation: landscape) {
+  .page {
+    padding: 12px 16px;
+  }
+
+  .page-header {
+    margin-bottom: 16px;
+  }
+
+  /* 横屏时减小卡片垂直间距 */
+  .v-card {
+    margin-bottom: 8px;
+  }
+}
+
+/* 超大屏幕优化 (>1920px) */
+@media (min-width: 1920px) {
+  .page {
+    max-width: 1600px;
+  }
+}

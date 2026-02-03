@@ -1,0 +1,37 @@
+services:
+  emby-stats:
+    image: qc0624/emby-stats:latest
+    container_name: emby-stats
+    restart: unless-stopped
+    ports:
+      - "8899:8000"
+    volumes:
+      # 挂载 Emby 数据目录（读写模式，用于 Item ID 替换工具）
+      - /path/to/emby/data:/data
+      # 配置目录（可写，用于保存名称映射等配置）
+      - emby-stats-config:/config
+    environment:
+      # 时区设置
+      - TZ=Asia/Shanghai
+      # 播放记录插件数据库路径（容器内路径）
+      - PLAYBACK_DB=/data/playback_reporting.db
+      # 用户数据库路径（容器内路径）
+      - USERS_DB=/data/users.db
+      # 认证数据库路径（容器内路径，用于自动获取 API Key）
+      - AUTH_DB=/data/authentication.db
+      # Emby 服务器地址
+      - EMBY_URL=http://your-emby-server:8096
+      # Emby API Key（可选，不填则自动从数据库获取）
+      - EMBY_API_KEY=
+      # 最小播放时长过滤（秒），低于此时长的记录不计入播放次数，0 或不填表示不过滤
+      # - MIN_PLAY_DURATION=300
+      # 时区偏移（小时），用于 SQLite 查询时间转换，上海为 +8，默认 8
+      # - TZ_OFFSET=8
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  emby-stats-config:

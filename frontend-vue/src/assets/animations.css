@@ -1,0 +1,93 @@
+/* 电影级 3D 弧形入场动画 - 最终交互优化版 */
+
+@keyframes cinematicArcReveal {
+  0% {
+    opacity: 0;
+    transform: perspective(1000px) translate3d(0, 60px, -60px) rotateX(-10deg) scale(0.95);
+    filter: blur(2px);
+  }
+  40% {
+    opacity: 0.8;
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    /* 回归标准 2D 坐标系，确保点击判定 100% 准确 */
+    transform: translate3d(0, 0, 0) rotateX(0deg) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* 初始隐藏状态 */
+.reveal-hidden {
+  opacity: 0;
+  transform: perspective(1000px) translate3d(0, 60px, -60px) rotateX(-10deg) scale(0.95);
+  filter: blur(2px);
+  pointer-events: none; /* 隐藏时禁止交互 */
+  will-change: transform, opacity, filter;
+}
+
+/* 触发动画的类 */
+.reveal-active {
+  animation: cinematicArcReveal 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  pointer-events: auto; /* 激活后恢复交互 */
+}
+
+
+/* 稍微收紧延迟步长，让整体显现过程更紧凑 */
+.delay-1 { animation-delay: 0.04s; }
+.delay-2 { animation-delay: 0.1s; }
+.delay-3 { animation-delay: 0.16s; }
+.delay-4 { animation-delay: 0.22s; }
+.delay-5 { animation-delay: 0.28s; }
+.delay-6 { animation-delay: 0.34s; }
+
+
+
+/* 悬停效果：仅在支持悬停的设备上启用，防止移动端滚动冲突 */
+@media (hover: hover) {
+  .hover-lift {
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
+    will-change: transform;
+  }
+
+  .hover-lift:hover {
+    transform: translate3d(0, -5px, 0) !important;
+  }
+}
+
+/* 移动端禁用 will-change 以节省资源，除非正在动画 */
+@media (max-width: 768px) {
+  .hover-lift {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+/* 悬停增强：使用平滑曲线，消除弹跳感 */
+.hover-lift {
+  will-change: transform;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+.hover-lift:hover {
+  transform: translate3d(0, -6px, 0) scale(1.01) !important;
+}
+
+/* 页面全局切换动画 - 柔和滑动淡入淡出 */
+.page-fade-enter-active,
+.page-fade-leave-active {
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+              transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.page-fade-enter-from {
+  opacity: 0;
+  transform: translateY(20px); /* 增加位移感 */
+}
+
+.page-fade-leave-to {
+  opacity: 0;
+  transform: translateY(-20px); /* 增加位移感 */
+}
+
