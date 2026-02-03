@@ -1,7 +1,7 @@
 services:
-  emby-stats:
-    image: qc0624/emby-stats:latest
-    container_name: emby-stats
+  emby-pulse:
+    image: leafss1022/emby-pulse:latest
+    container_name: emby-pulse
     restart: unless-stopped
     ports:
       - "8899:8000"
@@ -9,7 +9,7 @@ services:
       # 挂载 Emby 数据目录（读写模式，用于 Item ID 替换工具）
       - /path/to/emby/data:/data
       # 配置目录（可写，用于保存名称映射等配置）
-      - emby-stats-config:/config
+      - emby-pulse-config:/config
     environment:
       # 时区设置
       - TZ=Asia/Shanghai
@@ -34,4 +34,4 @@ services:
         max-file: "3"
 
 volumes:
-  emby-stats-config:
+  emby-pulse-config:

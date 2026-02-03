@@ -22,34 +22,34 @@ Emby 播放统计分析面板，提供直观的播放数据可视化。
 
 ```yaml
 services:
-  emby-stats:
-    image: qc0624/emby-stats:latest
-    container_name: emby-stats
+  emby-pulse:
+    image: leafss1022/emby-pulse:latest
+    container_name: emby-pulse
     ports:
       - "8899:8000"
     volumes:
       # 挂载 Emby 数据目录（包含 playback_reporting.db）
       - /path/to/emby/data:/data:ro
       # 配置持久化（保存服务器配置）
-      - emby-stats-config:/config
+      - emby-pulse-config:/config
     environment:
       - TZ=Asia/Shanghai
     restart: unless-stopped
 
 volumes:
-  emby-stats-config:
+  emby-pulse-config:
 ```
 
 ### Docker Run
 
 ```bash
 docker run -d \
-  --name emby-stats \
+  --name emby-pulse \
   -p 8899:8000 \
   -v /path/to/emby/data:/data:ro \
-  -v emby-stats-config:/config \
+  -v emby-pulse-config:/config \
   -e TZ=Asia/Shanghai \
-  qc0624/emby-stats:latest
+  leafss1022/emby-pulse:latest
 ```
 
 访问 `http://your-server:8899`，使用 Emby **管理员账号**登录。
@@ -72,7 +72,7 @@ volumes:
   # 服务器2
   - /path/to/emby2/data:/data2:ro
   # 配置持久化
-  - emby-stats-config:/config
+  - emby-pulse-config:/config
 ```
 
 然后在 Web 界面添加服务器，数据库路径填写容器内路径（如 `/data1/playback_reporting.db`）。

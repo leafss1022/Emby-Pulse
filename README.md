@@ -6,7 +6,7 @@
 
 <br/><br/>
 
-![Docker Pulls](https://img.shields.io/docker/pulls/yourusername/emby-pulse?style=for-the-badge&logo=docker)
+![Docker Pulls](https://img.shields.io/docker/pulls/leafss1022/emby-pulse?style=for-the-badge&logo=docker)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
 **Emby 播放统计分析面板 - 可视化你的观影数据**
@@ -91,16 +91,16 @@
 
 ```yaml
 services:
-  emby-stats:
-    image: qc0624/emby-stats:latest
-    container_name: emby-stats
+  emby-pulse:
+    image: leafss1022/emby-pulse:latest
+    container_name: emby-pulse
     ports:
       - "8899:8000"
     volumes:
       # 挂载包含 playback_reporting.db 的 data 目录（只读）
       - /path/to/emby/data:/data:ro
       # 配置目录（保存服务器配置、TG推送配置等，必须挂载否则更新容器后配置丢失）
-      - /path/to/emby-stats/config:/config
+      - /path/to/emby-pulse/config:/config
     environment:
       # Emby 服务器地址（必填）
       - EMBY_URL=http://your-emby-server:8096
@@ -123,13 +123,13 @@ docker compose up -d
 
 ```bash
 docker run -d \
-  --name emby-stats \
+  --name emby-pulse \
   -p 8899:8000 \
   -v /path/to/emby/data:/data:ro \
-  -v /path/to/emby-stats/config:/config \
+  -v /path/to/emby-pulse/config:/config \
   -e EMBY_URL=http://your-emby-server:8096 \
   -e TZ=Asia/Shanghai \
-  qc0624/emby-stats:latest
+  leafss1022/emby-pulse:latest
 ```
 
 ---
@@ -193,9 +193,9 @@ docker run -d \
 
 ```yaml
 services:
-  emby-stats:
-    image: qc0624/emby-stats:latest
-    container_name: emby-stats
+  emby-pulse:
+    image: leafss1022/emby-pulse:latest
+    container_name: emby-pulse
     ports:
       - "8899:8000"
     volumes:
@@ -204,13 +204,13 @@ services:
       # 服务器2的数据目录
       - /path/to/emby2/data:/data2:ro
       # 配置目录（用于保存服务器配置）
-      - emby-stats-config:/config
+      - emby-pulse-config:/config
     environment:
       - TZ=Asia/Shanghai
     restart: unless-stopped
 
 volumes:
-  emby-stats-config:
+  emby-pulse-config:
 ```
 
 然后在 Web 界面中添加服务器时，使用容器内的路径（如 `/data1/playback_reporting.db`）。
@@ -281,7 +281,7 @@ volumes:
 ```yaml
 # ❌ 错误！不要新建目录！
 volumes:
-  - ./emby-stats-data:/data  # 这是空目录，没有任何数据
+  - ./emby-pulse-data:/data  # 这是空目录，没有任何数据
 
 # ✅ 正确：挂载 Emby 的 data 目录
 volumes:
@@ -351,7 +351,7 @@ npm run dev
 ### 构建镜像
 
 ```bash
-docker build -t emby-stats .
+docker build -t emby-pulse .
 ```
 
 ---
